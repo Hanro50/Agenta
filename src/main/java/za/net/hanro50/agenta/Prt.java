@@ -29,7 +29,7 @@ public class Prt {
         }
 
         @Override
-        public void log(LEVEL level, String string2,Object ...args) {
+        public void log(LEVEL level, String string2, Object... args) {
             string2 = String.format(string2, args);
             switch (level) {
                 case ERROR:
@@ -48,20 +48,30 @@ public class Prt {
     }
 
     public static class sysImp implements Log {
+        String RED = "\033[1;33m";
+        String CLR = "\033[0m";
+
+        public sysImp() {
+            if (System.getProperty("agenta.console.colour", "true").equals("false")) {
+                RED = "";
+                CLR = "";
+            }
+
+        }
 
         @Override
-        public void log(LEVEL level, String string2,Object ...args) {
+        public void log(LEVEL level, String string2, Object... args) {
             string2 = String.format(string2, args);
             switch (level) {
                 case ERROR:
-                    System.err.println("\033[1;33m" + string2 + "\033[0m");
+                    System.err.println(RED + string2 + CLR);
                     break;
                 case FETAL:
-                    System.err.println("\033[1;31m" + string2 + "\033[0m");
+                    System.err.println(RED + string2 + CLR);
                     break;
                 default:
                 case INFO:
-                System.out.println("\033[0m" + string2 );
+                    System.out.println(CLR + string2);
                     break;
             }
 
@@ -71,21 +81,21 @@ public class Prt {
 
     static public interface Log {
 
-        void log(LEVEL level, String string2,Object ...args);
+        void log(LEVEL level, String string2, Object... args);
 
     }
 
-    public static void info(String info,Object ...args) {
-        log(LEVEL.INFO, info,args);
+    public static void info(String info, Object... args) {
+        log(LEVEL.INFO, info, args);
     }
     // public final static Logger prn = LogManager.getLogger("agenta");
 
-    public static void log(LEVEL level, String messsage,Object ...args) {
-        systemLogger.log(level, messsage,args);
+    public static void log(LEVEL level, String messsage, Object... args) {
+        systemLogger.log(level, messsage, args);
     }
 
-    public static void warn(String wrn,Object ...args) {
-        log(LEVEL.ERROR, wrn,args);
+    public static void warn(String wrn, Object... args) {
+        log(LEVEL.ERROR, wrn, args);
     }
 
 }

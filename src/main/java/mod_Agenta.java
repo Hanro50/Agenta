@@ -1,4 +1,3 @@
-@SuppressWarnings({"deprecation"})
 public class mod_Agenta extends BaseMod {
     static {za.net.hanro50.mod.Commom.load("legacy modloader");}
     public String getName() {return "Agenta";}

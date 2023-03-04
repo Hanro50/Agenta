@@ -7,3 +7,4 @@ This is merely a reference document;
 [*] agenta.assets.index => The URL for the asset index Agenta should use as a base;
 [*] agenta.assets.url => The URL for the resource server Agenta should pull assets from;
 [*] agenta.assets.fml => A link to an archive Agenta should forward legacy forge download requests to. 
+[*] agenta.console.colour => pass the value 'false' to disable colour printing. 
