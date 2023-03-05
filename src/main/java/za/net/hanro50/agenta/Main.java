@@ -18,7 +18,7 @@ public class Main {
             "\nThe following can fix this error\n" +
             "\t1) Try launching with the following JVM paramer \"--add-exports java.base/sun.net.www.protocol.http=ALL-UNNAMED\"\n"
             +
-            "\t2) Use java 8\n" +
+            "\t2) Use java 11\n" +
             "\t3) Report this error so it can be resolved! (If non of the above worked)\n" +
             "\nSupport (discord): https://discord.gg/f7THdzEPH2\n" +
             "Agenta cannot continue. Exiting...\n";
@@ -45,11 +45,9 @@ public class Main {
             return;
         System.setProperty("fml.ignoreInvalidMinecraftCertificates", "true");
         try {
-            Class.forName("sun.net.www.protocol.http.Handler").getConstructor().newInstance();
-
+            new sun.net.www.protocol.http.Handler();
         } catch (Throwable e) {
             Prt.log(Prt.LEVEL.FETAL, errorStr);
-
             throw new CannotProceedException();
         }
         try {
