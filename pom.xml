@@ -111,17 +111,27 @@
 						<goals>
 							<goal>shade</goal>
 						</goals>
-
 						<configuration>
 							<filters>
 								<filter>
 									<artifact>*:*</artifact>
 									<excludes>
-
-										<exclude>META-INF/versions/*</exclude>
+										<exclude>META-INF/versions/**</exclude>
 									</excludes>
 								</filter>
 							</filters>
+							<relocations>
+								<relocation>
+									<!--This
+									could conflict with forge...so I am just changing it out for
+									Google's South African Domain-->
+									<pattern>com.google</pattern>
+									<shadedPattern>za.co.google</shadedPattern>
+									<includes>
+										<include>com.google.**</include>
+									</includes>
+								</relocation>
+							</relocations>
 							<artifactSet>
 								<excludes>
 									<exclude>za.net.hanro50.modloader:*</exclude>
@@ -129,13 +139,6 @@
 									<exclude>org.apache.logging.log4j:*</exclude>
 								</excludes>
 							</artifactSet>
-							<transformers>
-
-								<!-- add Main-Class to manifest file -->
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-								</transformer>
-							</transformers>
 						</configuration>
 					</execution>
 				</executions>

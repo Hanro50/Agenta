@@ -3,6 +3,8 @@ package za.net.hanro50.mod;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.naming.CannotProceedException;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 import za.net.hanro50.agenta.Main;
@@ -50,7 +52,11 @@ public class AgentaPlugin extends JavaPlugin {
         } catch (Throwable e) {
         }
         Prt.info("Starting as Bukkit plugin");
-        Main.flight();
+        try {
+            Main.flight();
+        } catch (CannotProceedException e) {
+            Prt.log(LEVEL.FETAL, "Cannot manually stop Bukkit server.");
+        }
     }
 
     public void onDisable() {

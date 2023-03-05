@@ -44,7 +44,6 @@ public class Prt {
                     break;
             }
         }
-
     }
 
     public static class sysImp implements Log {
@@ -56,7 +55,6 @@ public class Prt {
                 RED = "";
                 CLR = "";
             }
-
         }
 
         @Override
@@ -80,15 +78,12 @@ public class Prt {
     }
 
     static public interface Log {
-
         void log(LEVEL level, String string2, Object... args);
-
     }
 
     public static void info(String info, Object... args) {
         log(LEVEL.INFO, info, args);
     }
-    // public final static Logger prn = LogManager.getLogger("agenta");
 
     public static void log(LEVEL level, String messsage, Object... args) {
         systemLogger.log(level, messsage, args);

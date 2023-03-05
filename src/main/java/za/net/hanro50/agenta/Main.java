@@ -1,19 +1,31 @@
 package za.net.hanro50.agenta;
 
+import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 
+import javax.naming.CannotProceedException;
+
+import za.net.hanro50.agenta.Prt.LEVEL;
 import za.net.hanro50.agenta.handler.Deligator;
 
 public class Main {
-    private static boolean init = false;
+    private static transient boolean init = false;
+    public static final String errorStr = "\nClass \"sun.net.www.protocol.http.Handler\" is not accessable!\n" +
+            "\nThe following can fix this error\n" +
+            "\t1) Try launching with the following JVM paramer \"--add-exports java.base/sun.net.www.protocol.http=ALL-UNNAMED\"\n"
+            +
+            "\t2) Use java 8\n" +
+            "\t3) Report this error so it can be resolved! (If non of the above worked)\n" +
+            "\nSupport (discord): https://discord.gg/f7THdzEPH2\n" +
+            "Agenta cannot continue. Exiting...\n";
 
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             NegativeArraySizeException, IllegalAccessException, IllegalArgumentException, InvocationTargetException,
-            InstantiationException {
+            InstantiationException, CannotProceedException {
         Prt.info("Running in static mode!");
         flight();
 
@@ -23,35 +35,34 @@ public class Main {
         M.invoke(null, new Object[] { args });
     }
 
-    public static void premain(String agentArgs, Instrumentation instrumentation) {
+    public static void premain(String agentArgs, Instrumentation instrumentation) throws CannotProceedException {
         Prt.info("Running in java agent mode!");
         flight();
     }
 
-    public static void flight() {
+    public static void flight() throws CannotProceedException {
         if (init)
             return;
         System.setProperty("fml.ignoreInvalidMinecraftCertificates", "true");
         try {
             Class.forName("sun.net.www.protocol.http.Handler").getConstructor().newInstance();
+
         } catch (Throwable e) {
-            Prt.log(Prt.LEVEL.FETAL, "Class \"sun.net.www.protocol.http.Handler\" is not accessable!");
-            Prt.log(Prt.LEVEL.FETAL, "\nThe following can fix this error");
-            Prt.log(Prt.LEVEL.FETAL,
-                    "\t1) Try launching with the following JVM paramer \"--add-exports java.base/sun.net.www.protocol.http=ALL-UNNAMED\"");
-            Prt.log(Prt.LEVEL.FETAL, "\t2) Use java 8");
-            Prt.log(Prt.LEVEL.FETAL, "\t3) Report this error so it can be resolved! (If non of the above worked)");
+            Prt.log(Prt.LEVEL.FETAL, errorStr);
 
-            Prt.log(Prt.LEVEL.FETAL, "\nSupport (discord): https://discord.gg/f7THdzEPH2");
-            Prt.log(Prt.LEVEL.FETAL, "Agenta cannot continue. Exiting...");
-            try {
-                Class.forName("System").getMethod("exit", Integer.class).invoke(null, -1);
-            } catch (Exception err) {
-                throw new RuntimeException();
-            }
-
+            throw new CannotProceedException();
         }
-        URL.setURLStreamHandlerFactory(new Deligator());
+        try {
+            URL.setURLStreamHandlerFactory(new Deligator());
+        } catch (Error err) {
+            try {
+                new URL("forward://127.0.0.1:80").openConnection();
+                Prt.info("Agenta is already loaded. Returning");
+            } catch (Error | IOException e) {
+                Prt.log(LEVEL.FETAL, "AGENTA FAILED TO LOAD!\nURL Stream Handler Factory is already set.");
+                e.printStackTrace();
+            }
+        }
         init = true;
     }
 }
