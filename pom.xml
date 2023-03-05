@@ -2,9 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>za.net.hanro50.gmll</groupId>
-	<artifactId>agent</artifactId>
-	<version>1.5.2</version>
+	<groupId>za.net.hanro50</groupId>
+	<artifactId>agenta</artifactId>
+	<version>1.6.1</version>
 	<properties>
 		<maven.compiler.source>1.5</maven.compiler.source>
 		<maven.compiler.target>1.5</maven.compiler.target>

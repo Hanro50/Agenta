@@ -5,7 +5,7 @@ showAsResourcePack=false
 
 [[mods]]
     modId="agenta"
-    version="1.6.0"
+    version="1.6.1"
     displayName="Agenta"
     logoFile="agenta.png"
     authors="Hanro50"
