@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>za.net.hanro50</groupId>
 	<artifactId>agenta</artifactId>
-	<version>1.6.1</version>
+	<version>1.6.2</version>
 	<properties>
 		<maven.compiler.source>1.5</maven.compiler.source>
 		<maven.compiler.target>1.5</maven.compiler.target>
@@ -61,7 +61,6 @@
 		</repository>
 	</repositories>
 	<build>
-		<finalName>agent</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
