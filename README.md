@@ -3,7 +3,7 @@ A authserver and skin fix for legacy versions of minecraft.
 
 # Compatibility
 Requires Java 7. (In theory this can be built for Java 5, but I lack the build tools required for that.)
-If running this on Java 9 and newer please add the following JVM argument: ```--add-exports java.base/sun.net.www.protocol.http=ALL-UNNAMED\"```
+If running this on Java 9 and newer please add the following JVM argument: ```--add-exports java.base/sun.net.www.protocol.http=ALL-UNNAMED```
 
 1) As a mod: The same Jar will run on forge, bukkit and Risugami's modloader for Minecaft versions Alpha 1.2.4 to Minecraft release 1.7.10 (These are merely the versions I tested)
 2) As a JavaAgent: Add the following JVM argument: ```-javaagent:{path}/agent.jar``` (replace path with the location of the agent.jar)
