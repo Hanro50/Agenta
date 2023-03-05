@@ -11,17 +11,17 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>za.net.hanro50.modloader</groupId>
-			<artifactId>modloader</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/dependencies/Modloader.jar</systemPath>
-			<optional />
-		</dependency>
-		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.10.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>za.net.hanro50</groupId>
+			<artifactId>modloader</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+			<optional />
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -31,7 +31,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<!--https://adfoc.us/serve/sitelinks/?id=271228&url=https://maven.minecraftforge.net/net/minecraftforge/forge/1.6.1-8.9.0.775/forge-1.6.1-8.9.0.775-universal.jar-->
 			<groupId>net.minecraftforge</groupId>
 			<artifactId>forge</artifactId>
 			<version>1.6.1-8.9.0.775</version>
@@ -39,7 +38,6 @@
 			<optional />
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
@@ -49,6 +47,10 @@
 		</dependency>
 	</dependencies>
 	<repositories>
+		<repository>
+			<id>Hanro50</id>
+			<url>https://download.hanro50.net.za/maven</url>
+		</repository>
 		<repository>
 			<id>Forge</id>
 			<url>https://maven.minecraftforge.net/</url>

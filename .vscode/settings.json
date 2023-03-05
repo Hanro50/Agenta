@@ -2,5 +2,6 @@
     "java.configuration.updateBuildConfiguration": "interactive",
     "cSpell.words": [
         "agenta"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }
