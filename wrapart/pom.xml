@@ -6,12 +6,12 @@
   <parent>
     <artifactId>redance</artifactId>
     <groupId>za.net.hanro50</groupId>
-    <version>1.7</version>
+    <version>1.7.1</version>
   </parent>
 
   <groupId>za.net.hanro50</groupId>
   <artifactId>wrapart</artifactId>
-  <version>1.7</version>
+  <version>1.7.1</version>
 
   <name>wrapart</name>
   <!-- FIXME change it to the project's website -->
@@ -19,15 +19,15 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.7.1</maven.compiler.source>
+    <maven.compiler.target>1.7.1</maven.compiler.target>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>za.net.hanro50</groupId>
       <artifactId>agenta</artifactId>
-      <version>1.7</version>
+      <version>1.7.1</version>
     </dependency>
     <dependency>
       <groupId>org.mybatis</groupId>
