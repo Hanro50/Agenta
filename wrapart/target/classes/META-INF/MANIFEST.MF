@@ -1,4 +1,0 @@
-Premain-Class: za.net.hanro50.App
-Can-Redefine-Classes: true
-Can-Retransform-Classes: true
-Main-Class: za.net.hanro50.Launcher

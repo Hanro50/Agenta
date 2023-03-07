@@ -1,4 +1,4 @@
-Premain-Class: za.net.hanro50.App
+Premain-Class: za.net.hanro50.wrapart.App
 Can-Redefine-Classes: true
 Can-Retransform-Classes: true
-Main-Class: za.net.hanro50.Launcher
+Main-Class: za.net.hanro50.wrapart.Launcher

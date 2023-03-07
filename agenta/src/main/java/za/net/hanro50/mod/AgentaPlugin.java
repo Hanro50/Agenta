@@ -25,9 +25,7 @@ public class AgentaPlugin extends JavaPlugin {
         }
 
         @Override
-        public void log(LEVEL level, String string2, Object... args) {
-
-            string2 = String.format(string2, args);
+        public void log(LEVEL level, String string2) {
             switch (level) {
                 case ERROR:
                     logger.warning(string2);

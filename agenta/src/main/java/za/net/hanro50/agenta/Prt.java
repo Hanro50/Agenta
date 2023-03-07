@@ -29,8 +29,8 @@ public class Prt {
         }
 
         @Override
-        public void log(LEVEL level, String string2, Object... args) {
-            string2 = String.format(string2, args);
+        public void log(LEVEL level, String string2) {
+
             switch (level) {
                 case ERROR:
                     logger1.warn(string2);
@@ -58,8 +58,7 @@ public class Prt {
         }
 
         @Override
-        public void log(LEVEL level, String string2, Object... args) {
-            string2 = String.format(string2, args);
+        public void log(LEVEL level, String string2) {
             switch (level) {
                 case ERROR:
                     System.err.println(RED + string2 + CLR);
@@ -78,15 +77,26 @@ public class Prt {
     }
 
     static public interface Log {
-        void log(LEVEL level, String string2, Object... args);
+        void log(LEVEL level, String string2);
     }
 
     public static void info(String info, Object... args) {
         log(LEVEL.INFO, info, args);
     }
 
+    // string2 = String.format(string2, args);
     public static void log(LEVEL level, String messsage, Object... args) {
-        systemLogger.log(level, messsage, args);
+        if (args.length > 0) {
+            try {
+                systemLogger.log(level, String.format(messsage, args));
+                return;
+            } catch (java.util.MissingFormatArgumentException e) {
+                systemLogger.log(LEVEL.ERROR, "Missing:" + e.getMessage());
+            } catch (java.util.UnknownFormatConversionException e) {
+                systemLogger.log(LEVEL.ERROR, "Conversion error:" + e.getMessage());
+            }
+        }
+        systemLogger.log(level, messsage);
     }
 
     public static void warn(String wrn, Object... args) {

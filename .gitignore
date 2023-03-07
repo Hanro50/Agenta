@@ -21,6 +21,11 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-
-target/*
 dependency-reduced-pom.xml
+agenta/target/*
+wrapart/target/*
+agenta/target/dependency-reduced-pom.xml
+wrapart/target/dependency-reduced-pom.xml
+
+wrapart/target/wrapart-1.7.jar
+

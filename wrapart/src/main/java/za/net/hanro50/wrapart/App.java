@@ -1,4 +1,4 @@
-package za.net.hanro50;
+package za.net.hanro50.wrapart;
 
 import java.lang.instrument.Instrumentation;
 import java.io.BufferedReader;
@@ -9,9 +9,13 @@ import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.CannotProceedException;
+
 import org.apache.ibatis.javassist.ClassPool;
 import org.apache.ibatis.javassist.CtClass;
 import org.apache.ibatis.javassist.CtConstructor;
+
+import za.net.hanro50.agenta.Main;
 
 /**
  * Hello world!
@@ -20,7 +24,8 @@ import org.apache.ibatis.javassist.CtConstructor;
 public final class App implements ClassFileTransformer {
     final static String targetClassName = "java.io.File";
     private static List<Patches> patches = new ArrayList<>();
-
+    final static String baseDir = System.getProperty("minecraft.dir", "/tmp/minecraft");
+    //
     final static String codeFix = "{System.out.println(\"Rerouting: \"+$1);  if ($1.indexOf(\"minecraft\")>0){$1 = \"/tmp/minecraft\"+ $1.substring($1.indexOf(\"minecraft\") +\"minecraft\".length()); }}";
     static {
         try {
@@ -43,12 +48,11 @@ public final class App implements ClassFileTransformer {
                 }
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    public static void premain(String agentArgs, Instrumentation instrumentation) throws ClassNotFoundException {
+    public static void premain(String agentArgs, Instrumentation instrumentation) throws ClassNotFoundException, CannotProceedException {
         System.out.println("[Agent] Loading...");
         Class<?> clazz = Class.forName(targetClassName);
         instrumentation.addTransformer(new App(), true);
@@ -58,6 +62,7 @@ public final class App implements ClassFileTransformer {
             throw new RuntimeException(
                     "[Agent] Transform failed for: [" + clazz.getName() + "]", ex);
         }
+        Main.premain(agentArgs, instrumentation);
     }
 
     public static String dotToPath(String dot) {
@@ -87,7 +92,7 @@ public final class App implements ClassFileTransformer {
                     System.out.println("NULL!");
                 }
                 CtConstructor method = cc.getDeclaredConstructor(cproxy);
-                method.insertBefore(patch.body);
+                method.insertBefore(patch.body.replaceAll("\\$\\{base\\}", baseDir));
             }
 
             byteCode = cc.toBytecode();

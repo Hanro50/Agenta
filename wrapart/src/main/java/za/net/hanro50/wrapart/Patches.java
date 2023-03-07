@@ -1,4 +1,4 @@
-package za.net.hanro50;
+package za.net.hanro50.wrapart;
 
 public class Patches {
     final String[] variables;
