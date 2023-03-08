@@ -34,8 +34,29 @@
       <artifactId>mybatis</artifactId>
       <version>3.5.11</version>
     </dependency>
-  </dependencies>
 
+    <dependency>
+      <groupId>net.sf.jopt-simple</groupId>
+      <artifactId>jopt-simple</artifactId>
+      <version>4.5</version>
+      <optional />
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.minecraftforge</groupId>
+      <artifactId>forge</artifactId>
+      <version>1.6.1-8.9.0.775</version>
+      <classifier>universal</classifier>
+      <optional />
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <repositories>
+    <repository>
+      <id>Forge</id>
+      <url>https://maven.minecraftforge.net/</url>
+    </repository>
+  </repositories>
   <build>
     <resources>
       <resource>
@@ -93,7 +114,7 @@
                   <excludes>
                     <exclude>META-INF/versions/**</exclude>
                     <exclude>mod_Agenta.class</exclude>
-                  <!--  <exclude>za/net/hanro50/mod/**</exclude>
+                    <!--  <exclude>za/net/hanro50/mod/**</exclude>
                     <exclude>agenta/**</exclude>
                     <exclude>plugin.yml</exclude>
                     <exclude>META-INF/mods.toml</exclude>

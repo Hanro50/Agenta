@@ -40,9 +40,9 @@ public class Main {
         flight();
     }
 
-    public static void flight() throws CannotProceedException {
+    public static boolean flight() throws CannotProceedException {
         if (init)
-            return;
+            return true;
         System.setProperty("fml.ignoreInvalidMinecraftCertificates", "true");
         try {
             new sun.net.www.protocol.http.Handler();
@@ -56,11 +56,15 @@ public class Main {
             try {
                 new URL("forward://127.0.0.1:80").openConnection();
                 Prt.info("Agenta is already loaded. Returning");
+                init = true;
+                return false;
             } catch (Error | IOException e) {
                 Prt.log(LEVEL.FETAL, "AGENTA FAILED TO LOAD!\nURL Stream Handler Factory is already set.");
                 e.printStackTrace();
+                return false;
             }
         }
         init = true;
+        return true;
     }
 }

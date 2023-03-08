@@ -1,5 +1,8 @@
 package za.net.hanro50.mod;
 
+import java.io.IOException;
+import java.net.URL;
+
 import javax.naming.CannotProceedException;
 
 import za.net.hanro50.agenta.Main;
@@ -13,7 +16,13 @@ public class Commom {
 
         Prt.info("Starting as " + src + " mod?!");
         try {
-            Main.flight();
+            if (!Main.flight()) {
+                try {
+                    new URL("prtconfig:fml").openConnection();
+                } catch ( IOException e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (CannotProceedException e) {
             try {
                 cpw.mods.fml.common.FMLCommonHandler.instance().raiseException(e, Main.errorStr, true);

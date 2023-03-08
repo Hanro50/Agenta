@@ -3,13 +3,13 @@
   <parent>
     <artifactId>redance</artifactId>
     <groupId>za.net.hanro50</groupId>
-    <version>1.7</version>
+    <version>1.7.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>za.net.hanro50</groupId>
   <artifactId>wrapart</artifactId>
   <name>wrapart</name>
-  <version>1.7</version>
+  <version>1.7.1</version>
   <url>http://www.example.com</url>
   <build>
     <resources>
@@ -86,9 +86,30 @@
       </plugin>
     </plugins>
   </build>
+  <repositories>
+    <repository>
+      <id>Forge</id>
+      <url>https://maven.minecraftforge.net/</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>net.sf.jopt-simple</groupId>
+      <artifactId>jopt-simple</artifactId>
+      <version>4.5</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.minecraftforge</groupId>
+      <artifactId>forge</artifactId>
+      <version>1.6.1-8.9.0.775</version>
+      <classifier>universal</classifier>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
   <properties>
-    <maven.compiler.target>1.7</maven.compiler.target>
-    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7.1</maven.compiler.target>
+    <maven.compiler.source>1.7.1</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>

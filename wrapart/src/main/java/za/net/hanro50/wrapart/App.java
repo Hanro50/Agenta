@@ -63,6 +63,12 @@ public final class App implements ClassFileTransformer {
                     "[Agent] Transform failed for: [" + clazz.getName() + "]", ex);
         }
         Main.premain(agentArgs, instrumentation);
+        try{
+   
+        }catch(Throwable e){
+
+        }
+
     }
 
     public static String dotToPath(String dot) {

@@ -17,6 +17,7 @@ import za.net.hanro50.agenta.handler.Deligates.FmlFix;
 import za.net.hanro50.agenta.handler.Deligates.ResourceText;
 import za.net.hanro50.agenta.handler.Deligates.ResourceXML;
 import za.net.hanro50.agenta.handler.Deligates.SkinDeligate;
+import za.net.hanro50.agenta.handler.protocols.PrtConfig;
 
 public class Deligator extends URLStreamHandler implements URLStreamHandlerFactory {
     private static List<Deligate> Deligates = new ArrayList<>();
@@ -32,6 +33,7 @@ public class Deligator extends URLStreamHandler implements URLStreamHandlerFacto
         addDeligate(new ResourceText());
 
         addprotocol("http", new Deligator());
+        addprotocol("prtconfig", new PrtConfig());
         addprotocol("forward", new sun.net.www.protocol.http.Handler());
     }
 
