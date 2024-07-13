@@ -11,12 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import za.net.hanro50.agenta.Prt;
-import za.net.hanro50.agenta.handler.Deligates.AuthFix;
-import za.net.hanro50.agenta.handler.Deligates.Deligate;
-import za.net.hanro50.agenta.handler.Deligates.FmlFix;
-import za.net.hanro50.agenta.handler.Deligates.ResourceText;
-import za.net.hanro50.agenta.handler.Deligates.ResourceXML;
-import za.net.hanro50.agenta.handler.Deligates.SkinDeligate;
+import za.net.hanro50.agenta.handler.deligates.AuthFix;
+import za.net.hanro50.agenta.handler.deligates.Deligate;
+import za.net.hanro50.agenta.handler.deligates.FmlFix;
+import za.net.hanro50.agenta.handler.deligates.ResourceText;
+import za.net.hanro50.agenta.handler.deligates.ResourceXML;
+import za.net.hanro50.agenta.handler.deligates.SkinDeligate;
 import za.net.hanro50.agenta.handler.protocols.PrtConfig;
 
 public class Deligator extends URLStreamHandler implements URLStreamHandlerFactory {
@@ -62,6 +62,7 @@ public class Deligator extends URLStreamHandler implements URLStreamHandlerFacto
             if (deligate.check(url))
                 return deligate.run(url, proxy);
         }
+        Prt.info("Deligate miss");
         return Deligate.forward(url, proxy);
     }
 

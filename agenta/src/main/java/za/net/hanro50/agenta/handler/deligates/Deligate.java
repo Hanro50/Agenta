@@ -1,4 +1,4 @@
-package za.net.hanro50.agenta.handler.Deligates;
+package za.net.hanro50.agenta.handler.deligates;
 
 import java.io.IOException;
 import java.net.Proxy;

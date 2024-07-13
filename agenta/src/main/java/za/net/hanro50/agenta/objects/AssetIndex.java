@@ -31,7 +31,7 @@ public class AssetIndex {
     for (Map.Entry<String, assetObj> field : this.objects.entrySet()) {
       String key = field.getKey();
       if (key.contains("/"))
-        lines = String.valueOf(lines) + key + "," + ((assetObj) field.getValue()).size + "," + timeMilli + "\n";
+        lines = String.valueOf(lines) + key + "," + ((assetObj) field.getValue()).size + "," + timeMilli + "\r\n" ;
     }
     return lines;
   }
