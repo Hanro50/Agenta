@@ -22,10 +22,8 @@
 hs_err_pid*
 replay_pid*
 dependency-reduced-pom.xml
-agenta/target/*
-wrapart/target/*
-agenta/target/dependency-reduced-pom.xml
-wrapart/target/dependency-reduced-pom.xml
+target/*
+target/dependency-reduced-pom.xml
 
 
 

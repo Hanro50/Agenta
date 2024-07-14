@@ -1,36 +1,157 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-    
+
   <groupId>za.net.hanro50</groupId>
-    
-  <artifactId>redance</artifactId>
-    
-  <version>1.8</version>
-    
-  <name>parent-project</name>
-    
-  <!-- FIXME change it to the project's website -->
-    
-  <url>http://www.example.com</url>
-    
-  <packaging>pom</packaging>
-    
+  <artifactId>agenta</artifactId>
+  <version>1.8.1</version>
+  <name>agenta</name>
+
   <properties>
-        
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
-    <maven.compiler.source>1.7</maven.compiler.source>
-        
-    <maven.compiler.target>1.7</maven.compiler.target>
-      
+    <maven.compiler.source>1.5</maven.compiler.source>
+    <maven.compiler.target>1.5</maven.compiler.target>
   </properties>
-    
-  <modules>
-        
-    <module>agenta</module>
-      
-  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>za.net.hanro50</groupId>
+      <artifactId>modloader</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+      <optional />
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.20.0</version>
+      <optional />
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.minecraftforge</groupId>
+      <artifactId>forge</artifactId>
+      <version>1.6.1-8.9.0.775</version>
+      <classifier>universal</classifier>
+      <optional />
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.jopt-simple</groupId>
+      <artifactId>jopt-simple</artifactId>
+      <version>4.5</version>
+      <optional />
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot-api</artifactId>
+      <version>1.19.2-R0.1-SNAPSHOT</version>
+      <optional />
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
   
+  <repositories>
+    <repository>
+      <id>Hanro50</id>
+      <url>https://download.hanro50.net.za/maven</url>
+    </repository>
+    <repository>
+      <id>Forge</id>
+      <url>https://maven.minecraftforge.net/</url>
+    </repository>
+    <repository>
+      <id>spigot-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+  </repositories>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <archive>
+            <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+          </archive>
+        </configuration>
+      </plugin>
+      <!-- Set a compiler level -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+          <compilerArgs>
+            <arg>--add-exports</arg>
+            <arg>java.base/sun.net.www.protocol.http=ALL-UNNAMED</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+      <!-- Maven Shade Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.3</version>
+        <executions>
+          <!-- Run shade goal on package phase -->
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/versions/**</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <relocations>
+                <relocation>
+                  <!--This
+									could conflict with forge...so I am just changing it out for
+									Google's South African Domain-->
+                  <pattern>com.google</pattern>
+                  <shadedPattern>za.co.google</shadedPattern>
+                  <includes>
+                    <include>com.google.**</include>
+                  </includes>
+                </relocation>
+              </relocations>
+              <artifactSet>
+                <excludes>
+                  <exclude>za.net.hanro50.modloader:*</exclude>
+                  <exclude>net.minecraftforge:*</exclude>
+                  <exclude>org.apache.logging.log4j:*</exclude>
+                </excludes>
+              </artifactSet>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
