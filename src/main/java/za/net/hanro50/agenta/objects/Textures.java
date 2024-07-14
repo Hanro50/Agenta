@@ -6,14 +6,14 @@ import java.util.Base64;
 
 public class Textures {
   private static Gson gson = (new GsonBuilder()).create();
-  
+
   public String name;
-  
+
   public String value;
-  
+
   public Player2 decompile() {
     byte[] decodedBytes = Base64.getDecoder().decode(this.value);
     String decodedString = new String(decodedBytes);
-    return (Player2)gson.fromJson(decodedString, Player2.class);
+    return (Player2) gson.fromJson(decodedString, Player2.class);
   }
 }

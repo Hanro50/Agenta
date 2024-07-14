@@ -51,7 +51,9 @@ public class Prt {
         String CLR = "\033[0m";
 
         public sysImp() {
-            if (System.getProperty("agenta.console.colour", "true").equals("false")) {
+            if (System.getProperty("agenta.console.colour", "true").equals("false")
+                    || System.console() == null
+                    || System.getenv().get("TERM") == null) {
                 RED = "";
                 CLR = "";
             }
@@ -61,14 +63,14 @@ public class Prt {
         public void log(LEVEL level, String string2) {
             switch (level) {
                 case ERROR:
-                    System.err.println(RED + string2 + CLR);
+                    System.err.println(RED + "[Agenta:wrn] " + string2 + CLR);
                     break;
                 case FETAL:
-                    System.err.println(RED + string2 + CLR);
+                    System.err.println(RED + "[Agenta:err] " + string2 + CLR);
                     break;
                 default:
                 case INFO:
-                    System.out.println(CLR + string2);
+                    System.out.println(CLR + "[Agenta:log] " + string2);
                     break;
             }
 

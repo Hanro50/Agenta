@@ -19,8 +19,8 @@ public class FmlFix extends Deligate {
     public URL run(URL url) throws IOException {
         String urlStr = url.toString();
         urlStr = (urlStr.startsWith(urlOld)) ? urlStr.substring(urlOld.length()) : "";
-        URL t = new URL(urlFix+urlStr);
-        Prt.info(urlFix+urlStr);
+        URL t = new URL(urlFix + urlStr);
+        Prt.info(urlFix + urlStr);
         return t;
     }
 

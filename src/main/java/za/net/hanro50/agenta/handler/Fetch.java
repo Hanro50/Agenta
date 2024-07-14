@@ -15,7 +15,8 @@ import java.util.Scanner;
 
 public class Fetch {
   static final Gson gson = (new GsonBuilder()).setPrettyPrinting().create();
- public static <T> T get(String url, Class<T> ClassOfT) throws IOException, InterruptedException, HTTPException {
+
+  public static <T> T get(String url, Class<T> ClassOfT) throws IOException, InterruptedException, HTTPException {
     InputStream res = get(url);
     try (Scanner s = new Scanner(res).useDelimiter("\\A")) {
       String result = s.hasNext() ? s.next() : "";

@@ -13,11 +13,10 @@ import za.net.hanro50.agenta.objects.HTTPException;
 
 public abstract class Resourcebase extends Deligate {
     final String urlFix;
-    public Resourcebase(String fixed){
-       urlFix = fixed;
+
+    public Resourcebase(String fixed) {
+        urlFix = fixed;
     }
-    
-    
 
     static final String assetURL = System.getProperty("agenta.assets.url", "https://resources.download.minecraft.net/");
     AssetIndex index;
@@ -55,11 +54,11 @@ public abstract class Resourcebase extends Deligate {
         }
 
         public InputStream getInputStream() throws IOException {
-         return get(urlStr,this.proxy);
+            return get(urlStr, this.proxy);
         }
     }
 
-    public abstract InputStream get(String urlStr,Proxy proxy)  throws IOException;
+    public abstract InputStream get(String urlStr, Proxy proxy) throws IOException;
 
     public void connect() throws IOException {
     }

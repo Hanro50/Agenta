@@ -34,7 +34,6 @@ public class SkinDeligate extends Deligate {
             String username = u.toString();
             username = username.substring(username.lastIndexOf("/") + 1);
             username = username.substring(0, username.length() - 4);
-            Prt.info(username);
             Player player = Fetch.get(protocol + "://api.mojang.com/users/profiles/minecraft/" + username,
                     Player.class);
             if (player != null) {

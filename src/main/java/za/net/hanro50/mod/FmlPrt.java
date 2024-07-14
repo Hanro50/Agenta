@@ -13,14 +13,13 @@ public class FmlPrt implements Log {
 
     public FmlPrt() {
         logger = LogManager.getLogManager().getLogger("Agenta");
-        
-        
+
         if (logger == null) {
             try {
-             Logger l = cpw.mods.fml.common.FMLLog.getLogger();
-             logger = Logger.getLogger("Agenta");
-             logger.setParent(l);
-             logger.setUseParentHandlers(true);
+                Logger l = cpw.mods.fml.common.FMLLog.getLogger();
+                logger = Logger.getLogger("Agenta");
+                logger.setParent(l);
+                logger.setUseParentHandlers(true);
             } catch (Throwable e) {
             }
         }

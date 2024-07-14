@@ -3,5 +3,6 @@
     "cSpell.words": [
         "agenta"
     ],
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "editor.formatOnSave": true
 }

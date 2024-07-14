@@ -19,7 +19,7 @@ public class Commom {
             if (!Main.flight()) {
                 try {
                     new URL("prtconfig:fml").openConnection();
-                } catch ( IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }

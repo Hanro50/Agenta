@@ -23,11 +23,11 @@ public class ResourceText extends Resourcebase {
   public InputStream get(String urlStr, Proxy proxy) throws IOException {
     String indexString;
     AssetIndex index = getIndex();
-    if (urlStr.length()==0) {
+    if (urlStr.length() == 0) {
 
       Prt.info("Checking index");
       if (index != null && !index.objects.isEmpty()) {
-        indexString = index.compileText().trim()+"\r\n";
+        indexString = index.compileText().trim() + "\r\n";
         return new ByteArrayInputStream(indexString.getBytes(StandardCharsets.UTF_8));
       }
       Prt.info("Loading fallback");
