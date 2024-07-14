@@ -35,3 +35,13 @@ Non of these are needed to launch Agenta. The available contexts are  <br>
 <td>static</td><td>agenta.main.class</td><td>-Dagenta.main.class={value}</td><td>The class Agenta should try to load next when running in static/inline mode</td>
 </tr>
 </table>
+
+# Fixes
+- Skin support for pre 1.7.10 versions 
+- Cape support for pre 1.7.10 versions
+- Sound for versions of the game that predate 1.6
+- World savings for certain pre-alpha builds (experimental)
+- Forge 1.5.2 being unable to fetch it's library files (experimental)
+
+# Note
+The same jar will work for almost every version of minecraft that predates Release 1.8
