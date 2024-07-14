@@ -4,5 +4,6 @@
         "agenta"
     ],
     "java.compile.nullAnalysis.mode": "automatic",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "maven.view": "hierarchical"
 }

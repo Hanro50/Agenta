@@ -11,7 +11,6 @@ public class FmlFix extends Deligate {
 
     @Override
     public Boolean check(URL url) {
-        Prt.info(url.toString());
         return url.toString().startsWith(urlOld);
     }
 

@@ -14,6 +14,7 @@ import za.net.hanro50.agenta.Prt;
 import za.net.hanro50.agenta.handler.deligates.AuthFix;
 import za.net.hanro50.agenta.handler.deligates.Deligate;
 import za.net.hanro50.agenta.handler.deligates.FmlFix;
+import za.net.hanro50.agenta.handler.deligates.MapFix;
 import za.net.hanro50.agenta.handler.deligates.ResourceText;
 import za.net.hanro50.agenta.handler.deligates.ResourceXML;
 import za.net.hanro50.agenta.handler.deligates.SkinDeligate;
@@ -31,6 +32,7 @@ public class Deligator extends URLStreamHandler implements URLStreamHandlerFacto
         addDeligate(new FmlFix());
         addDeligate(new ResourceXML());
         addDeligate(new ResourceText());
+        addDeligate(new MapFix());
 
         addprotocol("http", new Deligator());
         addprotocol("prtconfig", new PrtConfig());
@@ -57,11 +59,14 @@ public class Deligator extends URLStreamHandler implements URLStreamHandlerFacto
 
     @Override
     protected URLConnection openConnection(URL url, Proxy proxy) throws IOException {
-        Prt.info("Routing: " + url);
+
         for (Deligate deligate : Deligates) {
-            if (deligate.check(url))
+            if (deligate.check(url)) {
+                Prt.info("Rerouting: " + url);
                 return deligate.run(url, proxy);
+            }
         }
+        // Prt.info("Got :" + url);
         return Deligate.forward(url, proxy);
     }
 
