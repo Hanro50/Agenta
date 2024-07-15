@@ -2,7 +2,7 @@ package za.net.hanro50.mod;
 
 import cpw.mods.fml.common.Mod;
 
-@Mod(modid = "Agenta", name = "Agenta", version = "1.8.3", useMetadata = true)
+@Mod(modid = "Agenta", name = "Agenta", version = "1.8.4", useMetadata = true)
 public class AgentaFML {
     static {
         Commom.load("Forge");

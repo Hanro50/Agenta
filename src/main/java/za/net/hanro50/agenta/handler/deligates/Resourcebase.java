@@ -53,6 +53,7 @@ public abstract class Resourcebase extends Deligate {
 
         }
 
+        @Override
         public InputStream getInputStream() throws IOException {
             return get(urlStr, this.proxy);
         }

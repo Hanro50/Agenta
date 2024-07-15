@@ -5,6 +5,8 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 
+import za.net.hanro50.agenta.objects.ErrorConnection;
+
 public abstract class Deligate {
     public abstract Boolean check(URL url);
 
@@ -15,6 +17,9 @@ public abstract class Deligate {
     }
 
     public static URLConnection forward(URL url, Proxy proxy) throws IOException {
+        if (url == null)
+            return new ErrorConnection(url,proxy!=null);
+
         String protocol = url.getProtocol().equals("http") ? "forward" : url.getProtocol();
         URL urlForward = new URL(protocol, url.getHost(), url.getPort(), url.getFile());
 

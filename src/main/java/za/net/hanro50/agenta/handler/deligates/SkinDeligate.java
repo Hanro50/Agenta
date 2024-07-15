@@ -40,17 +40,17 @@ public class SkinDeligate extends Deligate {
 
     @Override
     public URL run(URL u) throws IOException {
+        String username = u.toString();
+
+        if (username.indexOf("get.jsp?user=") != -1) {
+            username = username.substring(username.lastIndexOf("=") + 1);
+
+        } else {
+            username = username.substring(username.lastIndexOf("/") + 1);
+            username = username.substring(0, username.length() - 4);
+        }
         try {
 
-            String username = u.toString();
-
-            if (username.indexOf("get.jsp?user=") != -1) {
-                username = username.substring(username.lastIndexOf("=") + 1);
-
-            } else {
-                username = username.substring(username.lastIndexOf("/") + 1);
-                username = username.substring(0, username.length() - 4);
-            }
             Player player = Fetch.get("https://api.mojang.com/users/profiles/minecraft/" + username,
                     Player.class);
             if (player != null) {
@@ -64,13 +64,15 @@ public class SkinDeligate extends Deligate {
                         return new URL(text);
                 }
             }
-        } catch (InterruptedException | za.net.hanro50.agenta.objects.HTTPException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (za.net.hanro50.agenta.objects.HTTPException e) {
         }
-        return u;
+        Prt.warn("Failed to get " + (skin ? "skin" : "cape") + " for " + username);
+        return null;
     }
 
-    public URLConnection run(URL url, final Proxy proxy) throws IOException {
+    public URLConnection run(final URL url, final Proxy proxy) throws IOException {
         final URL send = this.run(url);
         if (skin && System.getProperty("agenta.skin.resize", "true").equals("true")) {
             return new HttpURLConnection(url) {
@@ -79,6 +81,8 @@ public class SkinDeligate extends Deligate {
                 }
 
                 public InputStream getInputStream() throws IOException {
+                    if (send == null)
+                        return InputStream.nullInputStream();
                     // Fixes issues with handling modern skin formats on old versions
                     // (Thanks OptiFine!)
                     BufferedImage img;
@@ -90,6 +94,11 @@ public class SkinDeligate extends Deligate {
                     ByteArrayOutputStream os = new ByteArrayOutputStream();
                     ImageIO.write(img, "png", os);
                     return new ByteArrayInputStream(os.toByteArray());
+                }
+
+                @Override
+                public int getResponseCode() {
+                    return send == null ? 404 : 200;
                 }
 
                 @Override
