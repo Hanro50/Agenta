@@ -9,7 +9,7 @@ public class mod_Agenta extends BaseMod {
     }
 
     public String getVersion() {
-        return getClass().getPackage().getImplementationVersion();
+        return "1.8.2";
     }
 
     public String Version() {
