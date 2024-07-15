@@ -1,9 +1,16 @@
 package za.net.hanro50.agenta.handler.deligates;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.Proxy;
 import java.net.URL;
+import java.net.URLConnection;
 
-import javax.net.ssl.SSLProtocolException;
+import javax.imageio.ImageIO;
 
 import za.net.hanro50.agenta.Prt;
 import za.net.hanro50.agenta.handler.Fetch;
@@ -15,6 +22,11 @@ import za.net.hanro50.agenta.objects.Textures;
 public class SkinDeligate extends Deligate {
     private boolean skin;
     private String endpoint;
+    static {
+        if (!System.getProperty("agenta.skin.resize", "true").equals("true")) {
+            Prt.info("Disabling skin resizing!");
+        }
+    }
 
     public SkinDeligate(boolean skin, String endpoint) {
         this.skin = skin;
@@ -26,19 +38,24 @@ public class SkinDeligate extends Deligate {
         return url.toString().contains(endpoint);
     }
 
-    private String protocol = "https";
-
     @Override
     public URL run(URL u) throws IOException {
         try {
+
             String username = u.toString();
-            username = username.substring(username.lastIndexOf("/") + 1);
-            username = username.substring(0, username.length() - 4);
-            Player player = Fetch.get(protocol + "://api.mojang.com/users/profiles/minecraft/" + username,
+
+            if (username.indexOf("get.jsp?user=") != -1) {
+                username = username.substring(username.lastIndexOf("=") + 1);
+
+            } else {
+                username = username.substring(username.lastIndexOf("/") + 1);
+                username = username.substring(0, username.length() - 4);
+            }
+            Player player = Fetch.get("https://api.mojang.com/users/profiles/minecraft/" + username,
                     Player.class);
             if (player != null) {
                 Textures[] textures = Fetch.get(
-                        protocol + "://sessionserver.mojang.com/session/minecraft/profile/" + player.id,
+                        "https://sessionserver.mojang.com/session/minecraft/profile/" + player.id,
                         Profile.class).properties;
                 if (textures.length >= 1) {
                     Player2 plr = textures[0].decompile();
@@ -49,16 +66,44 @@ public class SkinDeligate extends Deligate {
             }
         } catch (InterruptedException | za.net.hanro50.agenta.objects.HTTPException e) {
             e.printStackTrace();
-        } catch (SSLProtocolException e) {
-            if (protocol.equals("https")) {
-                Prt.warn("HTTPS FAIL: Loading http fallback");
-                protocol = "http";
-                return run(u);
-            }
-            throw e;
         }
         return u;
+    }
 
+    public URLConnection run(URL url, final Proxy proxy) throws IOException {
+        final URL send = this.run(url);
+        if (skin && System.getProperty("agenta.skin.resize", "true").equals("true")) {
+            return new HttpURLConnection(url) {
+                @Override
+                public void connect() throws IOException {
+                }
+
+                public InputStream getInputStream() throws IOException {
+                    // Fixes issues with handling modern skin formats on old versions
+                    // (Thanks OptiFine!)
+                    BufferedImage img;
+                    img = ImageIO.read(send);
+
+                    if (img.getHeight() >= 64) {
+                        img = img.getSubimage(0, 0, 64, 32);
+                    }
+                    ByteArrayOutputStream os = new ByteArrayOutputStream();
+                    ImageIO.write(img, "png", os);
+                    return new ByteArrayInputStream(os.toByteArray());
+                }
+
+                @Override
+                public void disconnect() {
+                }
+
+                @Override
+                public boolean usingProxy() {
+                    return proxy != null;
+                }
+            };
+        }
+
+        return Deligate.forward(send, proxy);
     }
 
 }

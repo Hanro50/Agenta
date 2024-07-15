@@ -1,7 +1,7 @@
 
 public class mod_Agenta extends BaseMod {
     static {
-        za.net.hanro50.mod.Commom.load("legacy modloader");
+        za.net.hanro50.mod.Commom.load("Legacy Modloader");
     }
 
     public String getName() {
@@ -9,7 +9,7 @@ public class mod_Agenta extends BaseMod {
     }
 
     public String getVersion() {
-        return "1.8.2";
+        return "1.8.3";
     }
 
     public String Version() {

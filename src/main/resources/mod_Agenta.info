@@ -2,12 +2,13 @@
   {
     "modid": "mod_Agenta",
     "name": "Agenta",
-    "description": "A skin and sound fix for legacy versions of minecraft",
+    "description": "A skin and sound fix for legacy versions of minecraft\n(source: mod_)",
     "version": "${project.version}",
     "authors": [
       "Hanro50"
     ],
     "logoFile": "/agenta/banner.png",
+    "parent": "",
     "screenshots": []
   }
 ]

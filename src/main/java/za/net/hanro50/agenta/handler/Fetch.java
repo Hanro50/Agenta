@@ -8,13 +8,31 @@ import za.net.hanro50.agenta.objects.HTTPException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Scanner;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
 
 public class Fetch {
   static final Gson gson = (new GsonBuilder()).setPrettyPrinting().create();
+
+  static SSLContext sslContext;
+
+  static {
+    // Thanks OptiFine for somehow breaking https requests
+    try {
+      sslContext = SSLContext.getInstance("SSL");
+      sslContext.init(null, null, new SecureRandom());
+
+    } catch (NoSuchAlgorithmException | KeyManagementException e) {
+      e.printStackTrace();
+    }
+  }
 
   public static <T> T get(String url, Class<T> ClassOfT) throws IOException, InterruptedException, HTTPException {
     InputStream res = get(url);
@@ -29,7 +47,8 @@ public class Fetch {
   }
 
   public static InputStream get(String url) throws MalformedURLException, IOException, HTTPException {
-    HttpURLConnection httpURLConnection = (HttpURLConnection) (new URL(url)).openConnection();
+    HttpsURLConnection httpURLConnection = (HttpsURLConnection) (new URL(url)).openConnection();
+    httpURLConnection.setSSLSocketFactory(sslContext.getSocketFactory());
     httpURLConnection.connect();
     if (Math.floor((httpURLConnection.getResponseCode() / 100)) == 3.0D)
       return get(httpURLConnection.getHeaderField("Location"));

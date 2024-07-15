@@ -7,7 +7,6 @@ public class AuthFix extends Deligate {
 
     @Override
     public Boolean check(URL url) {
-
         return url.toString().startsWith("http://www.minecraft.net/game/");
     }
 

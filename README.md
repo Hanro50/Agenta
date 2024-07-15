@@ -20,6 +20,10 @@ Non of these are needed to launch Agenta. The available contexts are  <br>
 <th>Context</th><th>property</th><th>Argument</th><th>description</th>
 </tr>
 <tr>
+<td>*</td><td>agenta.skin.resize</td><td>-Dagenta.skin.resize={value}</td><td>Should agenta try to resize skins from 64x64 to 64x32 for better compatibility? (default: "true")</td>
+</tr>
+<tr>
+<tr>
 <td>*</td><td>agenta.assets.index</td><td>-Dagenta.assets.index={value}</td><td>The URL for the asset index Agenta should use as a base</td>
 </tr>
 <tr>

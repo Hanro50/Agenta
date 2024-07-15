@@ -7,7 +7,7 @@
 
   <groupId>za.net.hanro50</groupId>
   <artifactId>agenta</artifactId>
-  <version>1.8.2</version>
+  <version>1.8.3</version>
   <name>agenta</name>
 
   <properties>
@@ -59,9 +59,20 @@
       <optional />
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>net.fabricmc.fabric-api</groupId>
+      <artifactId>fabric-api</artifactId>
+      <version>0.10.3</version>
+      <scope>provided</scope>
+    </dependency>
+
   </dependencies>
   
   <repositories>
+    <repository>
+      <id>fabric-legacy</id>
+      <url>https://repo.legacyfabric.net/repository/legacyfabric/</url>
+    </repository>
     <repository>
       <id>Hanro50</id>
       <url>https://download.hanro50.net.za/maven</url>

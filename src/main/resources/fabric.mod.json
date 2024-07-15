@@ -5,5 +5,13 @@
     "name": "Agenta",
     "description": "A skin and sound fix for legacy version of minecraft",
     "license": "MIT",
-    "icon": "/agenta/banner.png"
+    "icon": "/agenta/banner.png",
+    "entrypoints": {
+        "main": [
+            "za.net.hanro50.mod.AgentaFabric"
+        ],
+        "init": [
+            "za.net.hanro50.mod.AgentaFabric"
+        ]
+    }
 }
