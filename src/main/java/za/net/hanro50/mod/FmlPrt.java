@@ -39,8 +39,9 @@ public class FmlPrt implements Log {
             case FETAL:
                 logger.log(Level.SEVERE, string2);
                 break;
-            default:
+            case DEBUG:
             case INFO:
+            default:
                 logger.info(string2);
                 break;
         }

@@ -40,6 +40,7 @@ public class Main {
         flight();
     }
 
+    @SuppressWarnings("restriction")
     public static boolean flight() throws CannotProceedException {
         if (init)
             return true;

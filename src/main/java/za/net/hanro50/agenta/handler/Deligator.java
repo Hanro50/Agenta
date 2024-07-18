@@ -20,6 +20,7 @@ import za.net.hanro50.agenta.handler.deligates.ResourceXML;
 import za.net.hanro50.agenta.handler.deligates.SkinDeligate;
 import za.net.hanro50.agenta.handler.protocols.PrtConfig;
 
+@SuppressWarnings("restriction")
 public class Deligator extends URLStreamHandler implements URLStreamHandlerFactory {
     private static List<Deligate> Deligates = new ArrayList<>();
     private static Map<String, URLStreamHandler> protocols = new HashMap<>();
@@ -62,7 +63,10 @@ public class Deligator extends URLStreamHandler implements URLStreamHandlerFacto
 
         for (Deligate deligate : Deligates) {
             if (deligate.check(url)) {
-                Prt.info("Rerouting: " + url);
+                if (Prt.DEBUG)
+                    Prt.debug("Rerouting: " + url);
+                else
+                    Prt.info("Rerouting: " + url.getHost() + url.getPath());
                 return deligate.run(url, proxy);
             }
         }

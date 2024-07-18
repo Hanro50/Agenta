@@ -33,8 +33,9 @@ public class AgentaPlugin extends JavaPlugin {
                 case FETAL:
                     logger.log(Level.SEVERE, string2);
                     break;
-                default:
+                case DEBUG:
                 case INFO:
+                default:
                     logger.info(string2);
                     break;
             }

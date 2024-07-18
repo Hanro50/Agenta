@@ -5,10 +5,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Prt {
+    public final static boolean DEBUG = System.getProperty("agenta.prt.debug", "false").equals("true");
+
     public static enum LEVEL {
         FETAL,
         ERROR,
-        INFO
+        INFO,
+        DEBUG
     }
 
     public static Log systemLogger;
@@ -38,8 +41,11 @@ public class Prt {
                 case FETAL:
                     logger1.log(Level.FATAL, string2);
                     break;
-                default:
+                case DEBUG:
+                    logger1.log(Level.DEBUG, string2);
+                    break;
                 case INFO:
+                default:
                     logger1.info(string2);
                     break;
             }
@@ -68,8 +74,11 @@ public class Prt {
                 case FETAL:
                     System.err.println(RED + "[Agenta:err] " + string2 + CLR);
                     break;
-                default:
+                case DEBUG:
+                    System.out.println(CLR + "[Agenta:dbg] " + string2);
+                    break;
                 case INFO:
+                default:
                     System.out.println(CLR + "[Agenta:log] " + string2);
                     break;
             }
@@ -80,10 +89,6 @@ public class Prt {
 
     static public interface Log {
         void log(LEVEL level, String string2);
-    }
-
-    public static void info(String info, Object... args) {
-        log(LEVEL.INFO, info, args);
     }
 
     // string2 = String.format(string2, args);
@@ -101,8 +106,17 @@ public class Prt {
         systemLogger.log(level, messsage);
     }
 
+    public static void info(String info, Object... args) {
+        log(LEVEL.INFO, info, args);
+    }
+
     public static void warn(String wrn, Object... args) {
         log(LEVEL.ERROR, wrn, args);
+    }
+
+    public static void debug(String wrn, Object... args) {
+        if (DEBUG)
+            log(LEVEL.DEBUG, wrn, args);
     }
 
 }

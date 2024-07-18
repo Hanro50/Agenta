@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 
 import za.net.hanro50.agenta.Prt;
 import za.net.hanro50.agenta.handler.Fetch;
+import za.net.hanro50.agenta.objects.Error404Connection;
 import za.net.hanro50.agenta.objects.Player;
 import za.net.hanro50.agenta.objects.Player2;
 import za.net.hanro50.agenta.objects.Profile;
@@ -74,6 +75,8 @@ public class SkinDeligate extends Deligate {
 
     public URLConnection run(final URL url, final Proxy proxy) throws IOException {
         final URL send = this.run(url);
+        if (send == null)
+            return new Error404Connection(url, proxy != null);
         if (skin && System.getProperty("agenta.skin.resize", "true").equals("true")) {
             return new HttpURLConnection(url) {
                 @Override
@@ -81,8 +84,6 @@ public class SkinDeligate extends Deligate {
                 }
 
                 public InputStream getInputStream() throws IOException {
-                    if (send == null)
-                        return InputStream.nullInputStream();
                     // Fixes issues with handling modern skin formats on old versions
                     // (Thanks OptiFine!)
                     BufferedImage img;
@@ -98,7 +99,7 @@ public class SkinDeligate extends Deligate {
 
                 @Override
                 public int getResponseCode() {
-                    return send == null ? 404 : 200;
+                    return send == null ? HttpURLConnection.HTTP_NOT_FOUND : HttpURLConnection.HTTP_ACCEPTED;
                 }
 
                 @Override

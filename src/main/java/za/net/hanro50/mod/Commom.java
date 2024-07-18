@@ -10,6 +10,7 @@ import za.net.hanro50.agenta.Prt;
 import za.net.hanro50.agenta.Prt.sysImp;
 
 public class Commom {
+
     static public void load(String src) {
         if (Prt.systemLogger instanceof sysImp)
             new FmlPrt();
