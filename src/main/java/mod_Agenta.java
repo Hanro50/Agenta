@@ -1,4 +1,6 @@
 
+import za.net.hanro50.agenta.Version;
+
 public class mod_Agenta extends BaseMod {
     static {
         za.net.hanro50.mod.Commom.load("Legacy Modloader");
@@ -9,11 +11,11 @@ public class mod_Agenta extends BaseMod {
     }
 
     public String getVersion() {
-        return "1.8.5";
+        return Version.get();
     }
 
     public String Version() {
-        return getVersion();
+        return Version.get();
     }
 
     public void load() {

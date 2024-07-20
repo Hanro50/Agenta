@@ -1,5 +1,6 @@
 package za.net.hanro50.agenta;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.Array;
@@ -66,6 +67,12 @@ public class Main {
             }
         }
         init = true;
+        File config = Config.getInstance().getConfigFile();
+        if (config == null) {
+            Prt.info("Using java arguments for configuration");
+        } else {
+            Prt.info("Loaded config from: " + config.getAbsolutePath());
+        }
         return true;
     }
 }

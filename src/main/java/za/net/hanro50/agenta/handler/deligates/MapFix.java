@@ -19,10 +19,11 @@ import java.nio.file.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import za.net.hanro50.agenta.Config;
 import za.net.hanro50.agenta.Prt;
 
 public class MapFix extends Deligate {
-    File savejson = new File("saves.json");
+    File savejson = new File(Config.get("agenta.save.file"));
     Gson gson = new GsonBuilder().create();
 
     static class saveData {

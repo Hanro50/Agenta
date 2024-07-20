@@ -7,6 +7,7 @@ import javax.naming.CannotProceedException;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import za.net.hanro50.agenta.Config;
 import za.net.hanro50.agenta.Main;
 import za.net.hanro50.agenta.Prt;
 import za.net.hanro50.agenta.Prt.LEVEL;
@@ -47,9 +48,14 @@ public class AgentaPlugin extends JavaPlugin {
 
     public void onEnable() {
         try {
+            Config.getInstance().load(getDataFolder());
+        } catch (Throwable e) {
+        }
+        try {
             new bukkitLogger();
         } catch (Throwable e) {
         }
+
         Prt.info("Starting as Bukkit plugin");
         try {
             Main.flight();

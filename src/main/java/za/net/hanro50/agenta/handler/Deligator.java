@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import za.net.hanro50.agenta.Config;
 import za.net.hanro50.agenta.Prt;
 import za.net.hanro50.agenta.handler.deligates.AuthFix;
 import za.net.hanro50.agenta.handler.deligates.Deligate;
@@ -30,9 +32,11 @@ public class Deligator extends URLStreamHandler implements URLStreamHandlerFacto
         addDeligate(new SkinDeligate(false, "/MinecraftCloaks/"));
         addDeligate(new SkinDeligate(false, "/cloak/"));
         addDeligate(new AuthFix());
-        addDeligate(new FmlFix());
-        addDeligate(new ResourceXML());
-        addDeligate(new ResourceText());
+        if (Config.get("agenta.assets.routing").equals("true")) {
+            addDeligate(new FmlFix());
+            addDeligate(new ResourceXML());
+            addDeligate(new ResourceText());
+        }
         addDeligate(new MapFix());
 
         addprotocol("http", new Deligator());

@@ -12,6 +12,7 @@ import java.net.URLConnection;
 
 import javax.imageio.ImageIO;
 
+import za.net.hanro50.agenta.Config;
 import za.net.hanro50.agenta.Prt;
 import za.net.hanro50.agenta.handler.Fetch;
 import za.net.hanro50.agenta.objects.Error404Connection;
@@ -23,8 +24,10 @@ import za.net.hanro50.agenta.objects.Textures;
 public class SkinDeligate extends Deligate {
     private boolean skin;
     private String endpoint;
+    private static boolean resize;
     static {
-        if (!System.getProperty("agenta.skin.resize", "true").equals("true")) {
+        resize = Config.get("agenta.skin.resize").equals("true");
+        if (!resize) {
             Prt.info("Disabling skin resizing!");
         }
     }
@@ -77,7 +80,7 @@ public class SkinDeligate extends Deligate {
         final URL send = this.run(url);
         if (send == null)
             return new Error404Connection(url, proxy != null);
-        if (skin && System.getProperty("agenta.skin.resize", "true").equals("true")) {
+        if (skin && resize) {
             return new HttpURLConnection(url) {
                 @Override
                 public void connect() throws IOException {

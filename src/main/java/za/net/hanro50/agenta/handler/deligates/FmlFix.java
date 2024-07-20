@@ -3,10 +3,11 @@ package za.net.hanro50.agenta.handler.deligates;
 import java.io.IOException;
 import java.net.URL;
 
+import za.net.hanro50.agenta.Config;
 import za.net.hanro50.agenta.Prt;
 
 public class FmlFix extends Deligate {
-    final String urlFix = System.getProperty("agenta.assets.fml", "https://download.hanro50.net.za/fmllibs");
+    final String urlFix = Config.get("agenta.assets.fml");
     final String urlOld = "http://files.minecraftforge.net/fmllibs";
 
     @Override

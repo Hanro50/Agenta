@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Prt {
-    public final static boolean DEBUG = System.getProperty("agenta.prt.debug", "false").equals("true");
+    public final static boolean DEBUG = Config.get("agenta.prt.debug").equals("true");
 
     public static enum LEVEL {
         FETAL,
@@ -57,7 +57,7 @@ public class Prt {
         String CLR = "\033[0m";
 
         public sysImp() {
-            if (System.getProperty("agenta.console.colour", "true").equals("false")
+            if (Config.get("agenta.prt.color").equals("false")
                     || System.console() == null
                     || System.getenv().get("TERM") == null) {
                 RED = "";

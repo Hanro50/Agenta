@@ -6,6 +6,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 
+import za.net.hanro50.agenta.Config;
 import za.net.hanro50.agenta.Prt;
 import za.net.hanro50.agenta.handler.Fetch;
 import za.net.hanro50.agenta.objects.AssetIndex;
@@ -18,7 +19,7 @@ public abstract class Resourcebase extends Deligate {
         urlFix = fixed;
     }
 
-    static final String assetURL = System.getProperty("agenta.assets.url", "https://resources.download.minecraft.net/");
+    static final String assetURL = Config.get("agenta.assets.url");
     AssetIndex index;
 
     AssetIndex getIndex() {
@@ -26,8 +27,7 @@ public abstract class Resourcebase extends Deligate {
             try {
                 Prt.info("Getting resource index");
                 index = Fetch.<AssetIndex>get(
-                        System.getProperty("agenta.assets.index",
-                                "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json"),
+                        Config.get("agenta.assets.index"),
                         AssetIndex.class);
             } catch (IOException | InterruptedException | HTTPException e) {
                 e.printStackTrace();
