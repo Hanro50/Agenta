@@ -37,7 +37,7 @@ public class Commom {
             e.printStackTrace();
         }
 
-        if (System.getProperty("agenta.onesix.preferML", "false").equals("true")) {
+        if (System.getProperty("agenta.onesix.config.fallback", "false").equals("true")) {
             load(src, null);
         }
     }
