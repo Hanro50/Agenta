@@ -26,7 +26,7 @@ public class Player2 {
   }
 
   public String getSkin() {
-    if (this.textures.CAPE != null)
+    if (this.textures.SKIN != null)
       return this.textures.SKIN.url;
     return null;
   }

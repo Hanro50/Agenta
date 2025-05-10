@@ -2,6 +2,7 @@ package za.net.hanro50.agenta.objects;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import java.util.Base64;
 
 public class Textures {

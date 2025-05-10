@@ -71,6 +71,8 @@ public class SkinDeligate extends Deligate {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (za.net.hanro50.agenta.objects.HTTPException e) {
+            Prt.warn("Experienced HTTP error!");
+            e.printStackTrace();
         }
         Prt.warn("Failed to get " + (skin ? "skin" : "cape") + " for " + username);
         return null;
