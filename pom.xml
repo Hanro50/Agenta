@@ -65,10 +65,28 @@
       <version>0.10.3</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+        <groupId>net.ornithemc.osl</groupId>
+        <artifactId>entrypoints</artifactId>
+        <version>0.4.3+mc1.3-pre-07261249-mc1.5.2</version>
+        <scope>provided</scope>
+    </dependency>
 
   </dependencies>
   
   <repositories>
+    <repository>
+        <id>ornithemc</id>
+        <url>https://maven.ornithemc.net/releases</url>
+    </repository>
+    <repository>
+        <id>quiltmc</id>
+        <url>https://maven.quiltmc.org/repository/release/</url>
+    </repository>
+    <repository>
+        <id>fabricmc</id>
+        <url>https://maven.fabricmc.net/</url>
+    </repository>
     <repository>
       <id>fabric-legacy</id>
       <url>https://repo.legacyfabric.net/repository/legacyfabric/</url>
