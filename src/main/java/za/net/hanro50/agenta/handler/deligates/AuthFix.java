@@ -69,10 +69,9 @@ public class AuthFix extends Deligate {
         String user = q[0].split("=")[1];
         String token = q[1].split("=")[1];
 
-        Prt.info(token, user);
-
         try {
-            (new Exception()).printStackTrace();
+            // I don't want to bypass mojang auth. So we do an equivalent modern call to
+            // this endpoint.
             InputStream res = Fetch
                     .get("https://session.minecraft.net/game/joinserver.jsp?user=" + user + "&sessionId=" + token
                             + "&serverId=" + serverID);
@@ -80,8 +79,6 @@ public class AuthFix extends Deligate {
             try (Scanner s = new Scanner(res).useDelimiter("\\A")) {
                 String result = s.hasNext() ? s.next() : "";
                 s.close();
-
-                Prt.info("mew" + result);
 
                 return new resourcesHandler(url, result.equals("OK"));
 
