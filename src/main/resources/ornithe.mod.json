@@ -8,10 +8,7 @@
     "icon": "/agenta/banner.png",
     "entrypoints": {
         "main": [
-            "za.net.hanro50.mod.AgentaFabric"
-        ],
-        "init": [
-            "za.net.hanro50.mod.AgentaFabric"
+            "za.net.hanro50.mod.AgentaOrnithe::init"
         ]
     }
 }

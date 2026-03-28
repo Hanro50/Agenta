@@ -67,10 +67,7 @@ public class Deligator extends URLStreamHandler implements URLStreamHandlerFacto
 
         for (Deligate deligate : Deligates) {
             if (deligate.check(url)) {
-                if (Prt.DEBUG)
-                    Prt.debug("Rerouting: " + url);
-                else
-                    Prt.info("Rerouting: " + url.getHost() + url.getPath());
+                Prt.info("Rerouting: " + url.getHost() + url.getPath() + " [" + url.getQuery() + "]");
                 return deligate.run(url, proxy);
             }
         }

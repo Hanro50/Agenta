@@ -8,6 +8,7 @@ import za.net.hanro50.agenta.objects.HTTPException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.KeyManagementException;
@@ -47,8 +48,10 @@ public class Fetch {
   }
 
   public static InputStream get(String url) throws MalformedURLException, IOException, HTTPException {
-    HttpsURLConnection httpURLConnection = (HttpsURLConnection) (new URL(url)).openConnection();
-    httpURLConnection.setSSLSocketFactory(sslContext.getSocketFactory());
+    HttpURLConnection httpURLConnection = (HttpURLConnection) (new URL(url)).openConnection();
+    if (httpURLConnection instanceof HttpsURLConnection)
+      ((HttpsURLConnection) httpURLConnection).setSSLSocketFactory(sslContext.getSocketFactory());
+
     httpURLConnection.connect();
     if (Math.floor((httpURLConnection.getResponseCode() / 100)) == 3.0D)
       return get(httpURLConnection.getHeaderField("Location"));

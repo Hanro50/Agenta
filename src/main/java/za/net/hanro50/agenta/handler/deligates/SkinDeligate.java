@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -22,6 +24,7 @@ import za.net.hanro50.agenta.objects.Profile;
 import za.net.hanro50.agenta.objects.Textures;
 
 public class SkinDeligate extends Deligate {
+    private Map<String, URLConnection> cache = new HashMap<>();
     private boolean skin;
     private String endpoint;
     private static boolean resize;
@@ -30,6 +33,11 @@ public class SkinDeligate extends Deligate {
         if (!resize) {
             Prt.info("Disabling skin resizing!");
         }
+    }
+
+    public URL run(URL url) throws IOException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'run'");
     }
 
     public SkinDeligate(boolean skin, String endpoint) {
@@ -42,17 +50,7 @@ public class SkinDeligate extends Deligate {
         return url.toString().contains(endpoint);
     }
 
-    @Override
-    public URL run(URL u) throws IOException {
-        String username = u.toString();
-
-        if (username.indexOf("get.jsp?user=") != -1) {
-            username = username.substring(username.lastIndexOf("=") + 1);
-
-        } else {
-            username = username.substring(username.lastIndexOf("/") + 1);
-            username = username.substring(0, username.length() - 4);
-        }
+    public URL getURL(String username) throws IOException {
         try {
 
             Player player = Fetch.get("https://api.mojang.com/users/profiles/minecraft/" + username,
@@ -79,44 +77,58 @@ public class SkinDeligate extends Deligate {
     }
 
     public URLConnection run(final URL url, final Proxy proxy) throws IOException {
-        final URL send = this.run(url);
+        String username = url.toString();
+
+        if (username.indexOf("get.jsp?user=") != -1) {
+            username = username.substring(username.lastIndexOf("=") + 1);
+
+        } else {
+            username = username.substring(username.lastIndexOf("/") + 1);
+            username = username.substring(0, username.length() - 4);
+        }
+        if (cache.containsKey(username)) {
+            return cache.get(username);
+        }
+        final URL send = this.getURL(username);
         if (send == null)
             return new Error404Connection(url, proxy != null);
-        if (skin && resize) {
-            return new HttpURLConnection(url) {
-                @Override
-                public void connect() throws IOException {
-                }
 
-                public InputStream getInputStream() throws IOException {
-                    // Fixes issues with handling modern skin formats on old versions
-                    // (Thanks OptiFine!)
-                    BufferedImage img;
-                    img = ImageIO.read(send);
+        URLConnection result = new HttpURLConnection(url) {
+            @Override
+            public void connect() throws IOException {
+            }
 
-                    if (img.getHeight() >= 64) {
-                        img = img.getSubimage(0, 0, 64, 32);
-                    }
-                    ByteArrayOutputStream os = new ByteArrayOutputStream();
-                    ImageIO.write(img, "png", os);
-                    return new ByteArrayInputStream(os.toByteArray());
-                }
+            public InputStream getInputStream() throws IOException {
+                BufferedImage img;
+                img = ImageIO.read(send);
 
-                @Override
-                public int getResponseCode() {
-                    return send == null ? HttpURLConnection.HTTP_NOT_FOUND : HttpURLConnection.HTTP_ACCEPTED;
+                // Fixes issues with handling modern skin formats on old versions
+                // (Thanks OptiFine!)
+                if (img.getHeight() >= 64 && resize) {
+                    img = img.getSubimage(0, 0, 64, 32);
                 }
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                ImageIO.write(img, "png", os);
+                return new ByteArrayInputStream(os.toByteArray());
 
-                @Override
-                public void disconnect() {
-                }
+            }
 
-                @Override
-                public boolean usingProxy() {
-                    return proxy != null;
-                }
-            };
-        }
+            @Override
+            public int getResponseCode() {
+                return send == null ? HttpURLConnection.HTTP_NOT_FOUND : HttpURLConnection.HTTP_ACCEPTED;
+            }
+
+            @Override
+            public void disconnect() {
+            }
+
+            @Override
+            public boolean usingProxy() {
+                return proxy != null;
+            }
+        };
+
+        cache.put(username, result);
 
         return Deligate.forward(send, proxy);
     }

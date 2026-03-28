@@ -21,6 +21,7 @@ import com.google.gson.GsonBuilder;
 
 import za.net.hanro50.agenta.Config;
 import za.net.hanro50.agenta.Prt;
+import za.net.hanro50.agenta.handler.deligates.MapFix.Data;
 
 public class MapFix extends Deligate {
     File savejson = new File(Config.get("agenta.save.file"));
