@@ -75,4 +75,8 @@ Non of these are needed to launch Agenta. The available contexts are <br>
 
 # Note
 
-The same jar will work for almost every version of minecraft that predates Release 1.8
+- The same jar will work for almost every version of minecraft that predates Release 1.8
+- Any miscellaneous fabric based modloader _should_ be supported.
+- NilLoader can load Agenta. (Agenta doesn't meet the criteria of a [NilLoader mod](https://git.sleeping.town/Nil/NilLoader#:~:text=A%20NilLoader%20mod%20includes%20a%20complete%20copy%20of%20NilLoader%20within%20itself))
+- Some ancient versions of Forge/modloader may require you to load Agenta as a jar mod.
+- LiteLoader inforces compatibility checks and so can never be fully supported

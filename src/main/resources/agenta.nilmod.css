@@ -1,0 +1,12 @@
+@nilmod {
+	/* There is no id field. The filename defines the id of the mod. */
+	name: "Agenta";
+	description: "A skin and sound fix for legacy version of minecraft";
+	authors: "Hanro50";
+	version: "${project.version}";
+}
+
+entrypoints {
+	/* premain is the only entrypoint defined by NilLoader itself. */
+	premain: "za.net.hanro50.mod.AgentaNil";
+}

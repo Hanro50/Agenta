@@ -155,7 +155,6 @@ public class SkinDeligate extends Deligate {
         return proxy != null;
       }
     };
-    Prt.info("MEW4");
     textureCache.put(username, result);
     return result;
 
