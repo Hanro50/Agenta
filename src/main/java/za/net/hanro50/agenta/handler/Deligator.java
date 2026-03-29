@@ -71,7 +71,6 @@ public class Deligator extends URLStreamHandler implements URLStreamHandlerFacto
                 return deligate.run(url, proxy);
             }
         }
-        // Prt.info("Got :" + url);
         return Deligate.forward(url, proxy);
     }
 

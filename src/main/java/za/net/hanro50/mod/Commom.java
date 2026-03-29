@@ -16,52 +16,52 @@ import za.net.hanro50.agenta.Prt.sysImp;
 
 public class Commom {
 
-    static public void load(String src) {
-        try {
-            Class<?> C = Class.forName("net.minecraft.client.Minecraft");
+  static public void load(String src) {
+    try {
+      Class<?> C = Class.forName("net.minecraft.client.Minecraft");
 
-            Method[] methods = C.getMethods();
+      Method[] methods = C.getMethods();
 
-            for (Method method : methods) {
-                if (method.getParameterTypes().length == 0 && method.getReturnType().equals(File.class)
-                        && Modifier.isStatic(method.getModifiers())) {
-                    File file = (File) method.invoke(null);
-                    load(src, new File(file, "config"));
-                    return;
-                }
-            }
-        } catch (ClassNotFoundException e) {
-
-        } catch (IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException e) {
-            e.printStackTrace();
+      for (Method method : methods) {
+        if (method.getParameterTypes().length == 0 && method.getReturnType().equals(File.class)
+            && Modifier.isStatic(method.getModifiers())) {
+          File file = (File) method.invoke(null);
+          load(src, new File(file, "config"));
+          return;
         }
+      }
+    } catch (ClassNotFoundException e) {
 
-        if (System.getProperty("agenta.onesix.config.fallback", "false").equals("true")) {
-            load(src, null);
-        }
+    } catch (IllegalAccessException | IllegalArgumentException
+        | InvocationTargetException e) {
+      e.printStackTrace();
     }
 
-    static public void load(String src, File config) {
-        Config.getInstance().load(config);
-        if (Prt.systemLogger instanceof sysImp)
-            new FmlPrt();
-
-        Prt.info("Starting as " + src + " mod?!");
-        try {
-            if (!Main.flight()) {
-                try {
-                    new URL("prtconfig:fml").openConnection();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (CannotProceedException e) {
-            try {
-                cpw.mods.fml.common.FMLCommonHandler.instance().raiseException(e, Main.errorStr, true);
-            } catch (Throwable e2) {
-                new Fallback();
-            }
-        }
+    if (System.getProperty("agenta.onesix.config.fallback", "false").equals("true")) {
+      load(src, null);
     }
+  }
+
+  static public void load(String src, File config) {
+    Config.getInstance().load(config);
+    if (Prt.systemLogger instanceof sysImp)
+      new FmlPrt();
+
+    Prt.info("Starting as " + src + " mod?!");
+    try {
+      if (!Main.flight()) {
+        try {
+          new URL("prtconfig:fml").openConnection();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    } catch (CannotProceedException e) {
+      try {
+        cpw.mods.fml.common.FMLCommonHandler.instance().raiseException(e, Main.errorStr, true);
+      } catch (Throwable e2) {
+        new Fallback();
+      }
+    }
+  }
 }

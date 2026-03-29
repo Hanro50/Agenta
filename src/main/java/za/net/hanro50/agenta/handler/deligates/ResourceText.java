@@ -16,7 +16,6 @@ public class ResourceText extends Resourcebase {
 
   public ResourceText() {
     super("http://www.minecraft.net/resources/");
-    // TODO Auto-generated constructor stub
   }
 
   @Override

@@ -9,41 +9,41 @@ import za.net.hanro50.agenta.Prt.LEVEL;
 import za.net.hanro50.agenta.Prt.Log;
 
 public class FmlPrt implements Log {
-    private Logger logger;
+  private Logger logger;
 
-    public FmlPrt() {
-        logger = LogManager.getLogManager().getLogger("Agenta");
+  public FmlPrt() {
+    logger = LogManager.getLogManager().getLogger("Agenta");
 
-        if (logger == null) {
-            try {
-                Logger l = cpw.mods.fml.common.FMLLog.getLogger();
-                logger = Logger.getLogger("Agenta");
-                logger.setParent(l);
-                logger.setUseParentHandlers(true);
-            } catch (Throwable e) {
-            }
-        }
-        if (logger != null)
-            Prt.systemLogger = this;
+    if (logger == null) {
+      try {
+        Logger l = cpw.mods.fml.common.FMLLog.getLogger();
+        logger = Logger.getLogger("Agenta");
+        logger.setParent(l);
+        logger.setUseParentHandlers(true);
+      } catch (Throwable e) {
+      }
     }
+    if (logger != null)
+      Prt.systemLogger = this;
+  }
 
-    @Override
-    public void log(LEVEL level, String string2) {
-        if (string2 == null)
-            string2 = "NULL";
+  @Override
+  public void log(LEVEL level, String string2) {
+    if (string2 == null)
+      string2 = "NULL";
 
-        switch (level) {
-            case ERROR:
-                logger.warning(string2);
-                break;
-            case FETAL:
-                logger.log(Level.SEVERE, string2);
-                break;
-            case DEBUG:
-            case INFO:
-            default:
-                logger.info(string2);
-                break;
-        }
+    switch (level) {
+      case ERROR:
+        logger.warning(string2);
+        break;
+      case FETAL:
+        logger.log(Level.SEVERE, string2);
+        break;
+      case DEBUG:
+      case INFO:
+      default:
+        logger.info(string2);
+        break;
     }
+  }
 }

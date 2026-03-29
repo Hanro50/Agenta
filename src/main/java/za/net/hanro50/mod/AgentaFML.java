@@ -6,9 +6,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = "Agenta", name = "Agenta", version = "1.8.6", useMetadata = true)
 public class AgentaFML {
-    @EventHandler
-    public void loadConfigurationOld(FMLPreInitializationEvent evt) {
-        Commom.load("Forge", evt.getModConfigurationDirectory());
-    }
+  @EventHandler
+  public void loadConfigurationOld(FMLPreInitializationEvent evt) {
+    Commom.load("Forge", evt.getModConfigurationDirectory());
+  }
 
 }

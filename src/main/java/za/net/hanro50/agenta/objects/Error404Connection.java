@@ -9,40 +9,40 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Error404Connection extends HttpURLConnection {
-    Boolean proxy;
+  Boolean proxy;
 
-    public Error404Connection(URL u, Boolean proxy) {
-        super(u);
-        this.proxy = proxy;
-        // TODO Auto-generated constructor stub
-    }
+  public Error404Connection(URL u, Boolean proxy) {
+    super(u);
+    this.proxy = proxy;
+    // TODO Auto-generated constructor stub
+  }
 
-    @Override
-    public void disconnect() {
-    }
+  @Override
+  public void disconnect() {
+  }
 
-    @Override
-    public boolean usingProxy() {
-        return proxy;
-    }
+  @Override
+  public boolean usingProxy() {
+    return proxy;
+  }
 
-    @Override
-    public void connect() throws IOException {
-    }
+  @Override
+  public void connect() throws IOException {
+  }
 
-    @Override
-    public int getResponseCode() {
-        return HttpURLConnection.HTTP_NOT_FOUND;
-    }
+  @Override
+  public int getResponseCode() {
+    return HttpURLConnection.HTTP_NOT_FOUND;
+  }
 
-    @Override
-    public InputStream getInputStream() throws IOException {
-        return new ByteArrayInputStream(new byte[] {});
-    }
+  @Override
+  public InputStream getInputStream() throws IOException {
+    return new ByteArrayInputStream(new byte[] {});
+  }
 
-    @Override
-    public OutputStream getOutputStream() throws IOException {
-        return new ByteArrayOutputStream();
-    }
+  @Override
+  public OutputStream getOutputStream() throws IOException {
+    return new ByteArrayOutputStream();
+  }
 
 }

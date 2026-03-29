@@ -1,16 +1,20 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "cSpell.words": [
-        "agenta"
-    ],
-    "java.compile.nullAnalysis.mode": "automatic",
-    "editor.formatOnSave": true,
-    "maven.view": "hierarchical",
-    "java.configuration.runtimes": [
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "cSpell.words": ["agenta"],
+  "java.compile.nullAnalysis.mode": "automatic",
+  "editor.formatOnSave": true,
+  "maven.view": "hierarchical",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "[java]": {
+    "editor.tabSize": 2
+  },
+  "java.configuration.runtimes": [
     {
       "name": "JavaSE-1.8",
-      "path": "/usr/lib/jvm/java-8-openjdk",      
+      "path": "/usr/lib/jvm/java-8-openjdk",
       "default": true
-    },
+    }
   ]
 }
