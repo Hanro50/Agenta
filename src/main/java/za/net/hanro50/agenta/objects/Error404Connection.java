@@ -14,7 +14,6 @@ public class Error404Connection extends HttpURLConnection {
   public Error404Connection(URL u, Boolean proxy) {
     super(u);
     this.proxy = proxy;
-    // TODO Auto-generated constructor stub
   }
 
   @Override

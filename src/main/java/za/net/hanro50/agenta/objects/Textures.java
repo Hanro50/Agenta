@@ -7,9 +7,7 @@ import java.util.Base64;
 
 public class Textures {
   private static Gson gson = (new GsonBuilder()).create();
-
   public String name;
-
   public String value;
 
   public Player2 decompile() {

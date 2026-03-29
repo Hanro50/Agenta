@@ -10,6 +10,8 @@ import java.net.URL;
 
 import javax.naming.CannotProceedException;
 
+import org.apache.commons.lang.ObjectUtils.Null;
+
 import za.net.hanro50.agenta.Prt.LEVEL;
 import za.net.hanro50.agenta.handler.Deligator;
 
@@ -30,7 +32,17 @@ public class Main {
     Prt.info("Running in static mode!");
     flight();
 
-    String main = System.getProperty("gmll.main.class", "net.minecraft.client.main.Main");
+    String oldVal = System.getProperty("gmll.main.class");
+
+    if (oldVal != null) {
+      System.err.println(
+          "ERROR: The property gmll.main.class has been retired. Agenta 1.10.0 will loose support!\nUse agenta.main.class");
+      System.out.println(
+          "ERROR: The property gmll.main.class has been retired. Agenta 1.10.0 will loose support!\nUse agenta.main.class");
+      System.setProperty("agenta.main.class", oldVal);
+    }
+
+    String main = System.getProperty("agenta.main.class", "net.minecraft.client.main.Main");
     Class<?> C = Class.forName(main);
     Method M = C.getMethod("main", new Class[] { Array.newInstance(String.class, 0).getClass() });
     M.invoke(null, new Object[] { args });

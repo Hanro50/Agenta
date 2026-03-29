@@ -11,16 +11,12 @@ import java.util.Map.Entry;
 
 public class AssetIndex {
   public Map<String, assetObj> objects;
-
   public boolean map_to_resources;
-
   public boolean virtual;
 
   public static class assetObj {
     public String hash;
-
     public String size;
-
     public String ignore;
   }
 

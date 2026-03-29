@@ -2,11 +2,8 @@ package za.net.hanro50.agenta.objects;
 
 public class Player2 {
   public long timestamp;
-
   public String profileId;
-
   public String profileName;
-
   public Textures textures;
 
   public static class TexturesURL {
@@ -15,7 +12,6 @@ public class Player2 {
 
   public static class Textures {
     public Player2.TexturesURL SKIN;
-
     public Player2.TexturesURL CAPE;
   }
 

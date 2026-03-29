@@ -22,20 +22,6 @@ public class Config {
     config.put(name, System.getProperty(name, defaultValue));
   }
 
-  private void setSystemConfig() {
-    config.put("agenta.config.version", Version.get());
-    setSys("agenta.prt.debug", "false");
-    setSys("agenta.prt.color", "true");
-    setSys("agenta.save.file", "saves.json");
-    setSys("agenta.skin.resize", "true");
-    setSys("agenta.assets.routing", "true");
-    setSys("agenta.assets.url", "https://resources.download.minecraft.net/");
-    setSys("agenta.assets.index",
-        "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json");
-    setSys("agenta.assets.fml", "https://download.hanro50.net.za/fmllibs");
-
-  }
-
   public File getConfigFile() {
     return this.configFile;
   }
@@ -49,7 +35,19 @@ public class Config {
   }
 
   private Config() {
-    setSystemConfig();
+    config.put("agenta.config.version", Version.get());
+    setSys("agenta.prt.debug", "false");
+    setSys("agenta.prt.color", "true");
+    setSys("agenta.save.file", "saves.json");
+    setSys("agenta.skin.resize", "true");
+    setSys("agenta.skin.merge", "true");
+    setSys("agenta.skin.cache", "true");
+    setSys("agenta.assets.routing", "true");
+    setSys("agenta.assets.url", "https://resources.download.minecraft.net/");
+    setSys("agenta.assets.index",
+        "https://launchermeta.mojang.com/v1/packages/3d8e55480977e32acd9844e545177e69a52f594b/pre-1.6.json");
+    setSys("agenta.assets.fml", "https://download.hanro50.net.za/fmllibs");
+
   }
 
   private void save(File configFile) throws IOException {
