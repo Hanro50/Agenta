@@ -52,7 +52,7 @@ public class AuthFix extends Deligate {
     public InputStream getInputStream() throws IOException {
       if (authed) {
         Prt.info("Authed");
-        return new ByteArrayInputStream("0".getBytes(StandardCharsets.UTF_8));
+        return new ByteArrayInputStream("1\n".getBytes(StandardCharsets.UTF_8));
       }
       Prt.info("ERROR");
       return new ByteArrayInputStream("ERROR".getBytes(StandardCharsets.UTF_8));
